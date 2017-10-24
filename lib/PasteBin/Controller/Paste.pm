@@ -21,7 +21,7 @@ sub show {
   my $self = shift;
   my $paste = $self->param('id');
   my $data = $self->DB->get($paste);
-  $self->render(id => $paste, content => $data  ? $data : "<b>Sorry… Paste trash called $paste not found!</b> );
+  $self->render(id => $paste, content => $data  ? $data : "<b>Sorry… Paste trash called $paste not found!</b>" );
 }
 
 !!42;
