@@ -1,6 +1,7 @@
 package PasteBin::Controller::Paste;
 use Mojo::Base 'Mojolicious::Controller';
 use PasteBin::DB::Storable;
+use Mojo::Template;
 
 has 'DB' => sub { PasteBin::DB::Storable->new()->bucket('paste') };
 # This action will render a template
@@ -15,7 +16,7 @@ sub create {
 sub show {
   my $self = shift;
   my $paste = $self->param('id');
-  $self->render(text => $self->DB->get($paste) );
+  $self->render('show.pm', text => $self->DB->get($paste) );
 }
 
 !!42;
