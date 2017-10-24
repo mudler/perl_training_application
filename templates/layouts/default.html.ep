@@ -1,4 +1,38 @@
 <!DOCTYPE html>
+<style>
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.controls {
+        text-align: right;
+        margin-top: -6px;
+}
+.wrapper{
+    background: #eee;
+    border: 1px solid #999;
+    width: 600px;
+}
+.wrapper textarea{
+    background: linear-gradient(to bottom, #e5e5e5 0%,#f2f2f2 100%);
+    border:none;
+    width:100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px dotted #999;
+    resize: none;
+}
+.wrapper textarea:focus{
+    outline: none;
+}
+</style>
 <html>
   <head><title><%= title %></title></head>
   <body><%= content %></body>

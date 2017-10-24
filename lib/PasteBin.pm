@@ -15,11 +15,9 @@ sub startup {
   my $r = $self->routes;
 
   # Normal route to controller
-  $r->get('/')->to('paste#new');
-
-  $r->post('/create')->to('paste#create');
-  $r->post('/edit')->to('paste#create');
-  $r->get('/show/:id')->to('paste#show');
+  $r->post('/pastebin/:id')->to('paste#create');
+  $r->get('/pastebin/:id')->to('paste#show');
+  $r->get('/')->to('paste#create');
 }
 
 1;
