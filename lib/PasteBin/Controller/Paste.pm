@@ -1,21 +1,27 @@
 package PasteBin::Controller::Paste;
 use Mojo::Base 'Mojolicious::Controller';
 use PasteBin::DB::Storable;
+use Mojo::Template;
 
 has 'DB' => sub { PasteBin::DB::Storable->new()->bucket('paste') };
 # This action will render a template
 sub create {
   my $self = shift;
-  my $paste = $self->param('id');
+  my @chars = ("A".."Z", "a".."z", 1..9);
+  my $id = $self->param('id');
   my $content = $self->param('content');
-  $self->DB->set($paste,$content);
-  $self->render(text => $self->DB->get($paste) );
+
+  $id = 0 + $id <= 0 ? (join '' => map $chars[rand @chars], 1 .. 8) : $id;
+
+  $self->DB->set($id,$content);
+  $self->redirect_to("show/$id");
 }
 
 sub show {
   my $self = shift;
   my $paste = $self->param('id');
-  $self->render(id => $paste, content => $self->DB->get($paste) );
+  my $data = $self->DB->get($paste);
+  $self->render(id => $paste, content => $data  ? $data : "<b>Sorry… Paste trash called $paste not found!</b> );
 }
 
 !!42;

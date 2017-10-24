@@ -15,7 +15,7 @@ sub startup {
   my $r = $self->routes;
 
   # Normal route to controller
-  $r->get('/')->to('example#welcome');
+  $r->get('/')->to('paste#new');
 
   $r->post('/create')->to('paste#create');
   $r->post('/edit')->to('paste#create');
