@@ -10,18 +10,19 @@ sub create {
   my @chars = ("A".."Z", "a".."z", 1..9);
   my $id = $self->param('id');
   my $content = $self->param('content');
-
-  $id = 0 + $id <= 0 ? (join '' => map $chars[rand @chars], 1 .. 8) : $id;
+  # Create id if not defined
+  $id = $id ? $id : (join '' => map $chars[rand @chars], 1 .. 8);
 
   $self->DB->set($id,$content);
-  $self->redirect_to("show/$id");
+  $self->redirect_to("/pastebin/$id");
 }
 
 sub show {
   my $self = shift;
-  my $paste = $self->param('id');
-  my $data = $self->DB->get($paste);
-  $self->render(id => $paste, content => $data  ? $data : "<b>Sorry… Paste trash called $paste not found!</b>" );
+  my $id = $self->param('id');
+  my $data = $self->DB->get($id);
+
+  $self->render(template => 'pastebin', id => $id, content => $data  ? $data : "Sorry… Paste trash called $id not found!");
 }
 
 !!42;
