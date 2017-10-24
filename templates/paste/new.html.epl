@@ -1,0 +1,6 @@
+<html>
+    <form action="/create" method="post" >
+    <textarea rows="4" cols="50" name="content" type="text"></textarea>
+    <input type="submit" value="Paste!" />
+    </form>
+</html>
