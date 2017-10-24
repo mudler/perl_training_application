@@ -4,13 +4,13 @@ use Mojo::File 'path';
 use Storable qw(lock_store lock_nstore lock_retrieve);
 use constant DB_FILE => '/tmp/data';
 has dbfile => DB_FILE;
-has '_data';
+has _data => sub {{}};
 has _root => sub {'1'};
 
 sub bucket {
   my $self  = shift;
   my $bucket = shift;
-  __PACKAGE__->new(_root=>$bucket, dbfile=>$self->dbfile );
+  __PACKAGE__->new(_root=>$bucket, dbfile=> $self->dbfile );
 }
 
 *buckets = \&keys;
@@ -31,7 +31,16 @@ sub keys {
 sub set {
   my $self = shift;
   $self->retrieve;
-  $self->_data->{$self->_root}->{$_[0]} = $_[1];
+  my $data =   $self->_data;
+  $data->{$self->_root}->{$_[0]} = $_[1];
+  $self->save;
+  $self;
+}
+
+sub remove {
+  my $self = shift;
+  $self->retrieve;
+  delete $self->_data->{$self->_root}->{$_[0]};
   $self->save;
   $self;
 }

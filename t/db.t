@@ -11,4 +11,9 @@ is $foo_bucket->get('test'), 'foo';
 ok grep { /foo/ } $foo_bucket->keys;
 ok grep { /test/ } $foo_bucket->keys;
 
-done_testing();
+$foo_bucket->remove('test');
+ok(!(grep { /test/ } $foo_bucket->keys)) or diag explain $foo_bucket;
+
+$foo_bucket->retrieve;
+diag explain $foo_bucket;
+done_testing();;
