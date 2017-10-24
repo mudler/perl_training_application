@@ -1,0 +1,13 @@
+% layout 'default';
+
+<div class="wrapper">
+ <label for="message">Pastebin:</label>
+ <form method=post>
+     <textarea name="content" cols="50" rows="10" >
+             <%= $paste %>
+      </textarea>
+      <div class="controls">
+          <input class="button" name="create" type="submit" value="save">
+      </div>
+  </form>
+</div>

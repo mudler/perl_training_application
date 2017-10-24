@@ -15,11 +15,17 @@ sub startup {
   my $r = $self->routes;
 
   # Normal route to controller
+<<<<<<< HEAD
   $r->get('/')->to('paste#new');
 
   $r->post('/create')->to('paste#create');
   $r->post('/edit')->to('paste#create');
   $r->get('/show/:id')->to('paste#show');
+=======
+  $r->post('/pastebin/:id')->to('paste#save');
+  $r->get('/pastebin/:id')->to('paste#show');
+  $r->get('/')->to('paste#create');
+>>>>>>> Paste bin using same url with get and post
 }
 
 1;
